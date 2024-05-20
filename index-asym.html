@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chiffrement avec Web Crypto API</title>
+    <style>
+code {
+  background-color: lightgrey;
+  font-family: monospace;
+}
+    </style>
+</head>
+<body>
+    <p>Données chiffrées dans le navigateur :<pre><code id="crypted"/></pre></p>
+    <script>
+
+/**
+ * Décode la clé publique pem base 64 et l'importe CryptoKey.
+ *
+ * @param {publicKeyPem} clé publique au format pem
+ **/
+async function pemToCryptoKey(publicKeyPem) {
+    // Décoder la clé PEM en ArrayBuffer
+    const b64 = publicKeyPem.replace(/-----(BEGIN|END) PUBLIC KEY-----/g, '').replace(/\s+/g, '');
+    const binaryDerString = window.atob(b64);
+    const binaryDer = new Uint8Array(binaryDerString.length);
+    for (let i = 0; i < binaryDerString.length; i++) {
+        binaryDer[i] = binaryDerString.charCodeAt(i);
+    }
+    
+    // Importer la clé en CryptoKey
+    return window.crypto.subtle.importKey(
+        'spki',
+        binaryDer.buffer,
+        {
+            name: 'RSA-OAEP',
+            hash: 'SHA-256',
+        },
+        true,
+        ['encrypt']
+    );
+}
+
+/**
+ * Chiffre les données avec la clé publique.
+ *
+ * @param {publicKeyPem} clé publique au format pem
+ * @param {data} données à chiffrer
+ **/
+async function encryptData(publicKeyPem, data) {
+    const enc = new TextEncoder();
+    const encodedData = enc.encode(data);
+    const encryptedData = await window.crypto.subtle.encrypt(
+        {
+            name: 'RSA-OAEP',
+        },
+        publicKeyPem,
+        encodedData
+    );
+    return btoa(String.fromCharCode.apply(null, new Uint8Array(encryptedData)));
+}
+
+
+
+
+/**
+ * Fonction principale de tests.
+ **/
+async function main() {
+    const publicKeyPem = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1lyHU8vhYu85c9V672ko
+B0sJkkA2pofd4Vp0svTnULqchd+qOsnTUmhMPQhNTy2bfniwnvAtaupO6xFWXqwQ
+WAeMRtTtzxR/yA547c3zqTa7b/nBNZYvIsyg/B+PcpaJS4OPoRNFwMxX08tkzeMa
+7FZuC0xjENW5zUz1dhl9v+TUtSEsWI8oekq1B7hQ1GhUOF/z/rXw/Pya/mXgpywI
+Pi8vTedIRvvMaRL3cL4d5HiaOFtlaYv31nCgfybNXtkh/TZ+RHuqM0Xo204m18We
+EcGnW5UbSoyHeRDTkA3BYzTzdj7G6mbECSIjEwnqRjCOdAYd8SGUcr4F/S6Mngqo
+mwIDAQAB
+-----END PUBLIC KEY-----`;
+
+    const data = "Hello, world depuis navigateur !";
+
+    const publicKey = await pemToCryptoKey(publicKeyPem);
+    const encryptedData = await encryptData(publicKey, data);
+
+    console.log('Données chiffrées dans le navigateur :', encryptedData);
+    document.getElementById('crypted').textContent=encryptedData;
+}
+
+// Go !
+main();
+
+    </script>
+</body>
+</html>
+

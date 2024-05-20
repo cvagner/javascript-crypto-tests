@@ -1,0 +1,13 @@
+{
+  "name": "javascript-crypto-tests",
+  "version": "1.0.0",
+  "description": "Tests de chiffrements asymétrique et symétrique en javascript",
+  "author": "Charles-Henry Vagner",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "symetrique": "node index-sym.js",
+    "asymetrique": "node index-asym.js && open index-asym.html"
+  }
+}
