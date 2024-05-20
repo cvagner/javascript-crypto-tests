@@ -44,6 +44,8 @@ Chiffrement :
 Déchiffrement :
 * Les données chiffrées avec la clé publique ne peuvent être déchiffrées qu'avec la clé privée correspondante.
 
+Pour des raisons pratiques, la paire de clés est embarquée dans le code et la génération avec `generateKeyFiles` commentée. Ne pas utiliser la paire dans un autre cadre que cet exemple !
+
 Exemple complet :
 ```sh
 yarn run asymetrique
