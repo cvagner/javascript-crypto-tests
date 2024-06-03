@@ -26,9 +26,9 @@ node index-sym.js
 
 # Résultat (exemple)
 # Clé AES-256 générée         : f24270c17f4fa831f5611304c2f653a8b806376946b7cf92b49212a72525c1bd
-# Donnés à chiffrer           : Une donnée sensible
-# Donnés chiffrées par node   : 661fe2cfce289fe8d513d211a46fc2c8:84cd5d7e614ba3d2b86122a02fff1f7fcdaaf638
-# Donnés déchiffrées par node : Une donnée sensible
+# Données à chiffrer           : Une donnée sensible
+# Données chiffrées par node   : 661fe2cfce289fe8d513d211a46fc2c8:84cd5d7e614ba3d2b86122a02fff1f7fcdaaf638
+# Données déchiffrées par node : Une donnée sensible
 ```
 
 ## Chiffrement asymétrique

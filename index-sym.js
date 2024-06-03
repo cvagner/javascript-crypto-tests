@@ -38,11 +38,11 @@ function decryptText(text, key) {
 const cle = 'a877a54ef5dbd29ca1bad228b0eaa41679c3f5cce2dc91055a570b3a9b02323e';
 const texte = 'Une donnée sensible';
 
-console.log('Donnés à chiffrer           :', texte);
+console.log('Données à chiffrer           :', texte);
 
 const texteEncrypte = encryptText(texte, cle);
-console.log('Donnés chiffrées par node   :', texteEncrypte);
+console.log('Données chiffrées par node   :', texteEncrypte);
 
 const decryptedText = decryptText(texteEncrypte, cle);
-console.log('Donnés déchiffrées par node :', decryptedText);
+console.log('Données déchiffrées par node :', decryptedText);
 
