@@ -1,6 +1,6 @@
 # Javascript crypto tests
 
-L'objectif est de montrer comment réaliser des chiffrements asymétrique et symétrique en javascript avec deux exemples :
+L'objectif est de montrer comment réaliser des (dé)chiffrements asymétriques et symétriques en javascript avec deux exemples :
 * `index-sym.js` 
   * Chiffrage symétrique en node
   * Exemple d'utilisation : le serveur chiffre et déchiffre lui-même mais on ne souhaite pas stocker l'information en clair.
